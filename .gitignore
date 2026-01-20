@@ -1,0 +1,51 @@
+# Environment files
+.env
+.env.local
+*.env.local
+
+# SSL certificates
+nginx/ssl/*.pem
+nginx/ssl/*.key
+nginx/ssl/*.crt
+
+# Backend
+career_app_backend/__pycache__/
+career_app_backend/*.pyc
+career_app_backend/*.pyo
+career_app_backend/.pytest_cache/
+career_app_backend/uploads/
+career_app_backend/.venv/
+career_app_backend/venv/
+
+# Frontend
+career_app_frontend/node_modules/
+career_app_frontend/dist/
+career_app_frontend/.vite/
+career_app_frontend/build/
+
+# Logs
+*.log
+logs/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Docker
+.dockerignore
+
+# Temporary files
+*.tmp
+*.temp
+.cache
+
+# Backups
+*.backup
+*.bak
+uploads-backup-*.tar.gz

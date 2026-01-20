@@ -1,0 +1,8 @@
+# SSL certificates (never commit these!)
+ssl/*.pem
+ssl/*.key
+ssl/*.crt
+ssl/*.csr
+
+# Keep the directory but not the files
+!ssl/.gitkeep
