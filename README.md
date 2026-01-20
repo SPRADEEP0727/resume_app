@@ -35,9 +35,16 @@ Nginx Container (reverse proxy)
 
 ## 🚀 Quick Deploy on VPS (Hostinger)
 
+### Hostinger Docker Manager (Easiest)
+1. Open **Docker Manager** in Hostinger panel
+2. Add new application with Git URL: `https://github.com/SPRADEEP0727/resume_app.git`
+3. Add environment variables (see `.env.example`)
+4. Click Deploy!
+
+### Manual Deployment
 ```bash
 # Clone the repository
-git clone https://github.com/SPRADEEP0727/career_app_backend.git resume_app
+git clone https://github.com/SPRADEEP0727/resume_app.git resume_app
 cd resume_app
 
 # Configure environment

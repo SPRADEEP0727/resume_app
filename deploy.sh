@@ -11,7 +11,7 @@ echo "==================================="
 
 # Configuration
 DEPLOY_DIR="/var/www/resume_app"
-REPO_URL="https://github.com/SPRADEEP0727/career_app_backend.git"
+REPO_URL="https://github.com/SPRADEEP0727/resume_app.git"
 
 # Colors
 RED='\033[0;31m'

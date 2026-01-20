@@ -21,6 +21,41 @@ Internet → Nginx (80/443) → Frontend (3000)
 3. **Domain name** (optional but recommended)
 4. **SSL Certificate** (Let's Encrypt recommended)
 
+## Deployment Methods
+
+### Method 1: Hostinger Docker Manager (Recommended for Hostinger VPS)
+
+If you're using Hostinger VPS with Docker Manager, deployment is extremely simple:
+
+1. **Access Docker Manager** in your Hostinger panel
+2. **Create New Container** or **Add Application**
+3. **Provide Git Repository URL**: 
+   ```
+   https://github.com/SPRADEEP0727/resume_app.git
+   ```
+4. **Configure Environment Variables** in the Docker Manager:
+   - `OPENAI_API_KEY` - Your OpenAI API key
+   - `SECRET_KEY` - Generate a secure random key
+   - `VITE_SUPABASE_URL` - Your Supabase project URL
+   - `VITE_SUPABASE_ANON_KEY` - Your Supabase anon key
+   - `VITE_API_BASE_URL` - Set to `/api`
+
+5. **Deploy** - Hostinger will automatically:
+   - Clone the repository
+   - Build Docker containers using `docker-compose.yml`
+   - Start all services (nginx, backend, frontend)
+   - Assign ports and domain
+
+6. **Access Your App** via the provided Hostinger domain or your custom domain
+
+**That's it!** Hostinger handles all the Docker orchestration automatically.
+
+---
+
+### Method 2: Manual Deployment (For Non-Hostinger or Advanced Users)
+
+If you're not using Hostinger's Docker Manager or prefer manual control:
+
 ## Installation Steps
 
 ### 1. Install Docker on VPS
@@ -48,7 +83,7 @@ docker-compose --version
 
 ```bash
 cd /var/www
-git clone https://github.com/SPRADEEP0727/career_app_backend.git resume_app
+git clone https://github.com/SPRADEEP0727/resume_app.git resume_app
 cd resume_app
 ```
 
