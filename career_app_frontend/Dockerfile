@@ -16,8 +16,8 @@ ENV VITE_API_BASE_URL=${VITE_API_BASE_URL}
 # Copy package files
 COPY package*.json ./
 
-# Install dependencies
-RUN npm ci
+# Install dependencies - use install instead of ci to avoid npm registry issues
+RUN npm install --legacy-peer-deps || npm install --force
 
 # Copy source code
 COPY . .
