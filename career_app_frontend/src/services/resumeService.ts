@@ -118,7 +118,7 @@ export const resumeService = {
       formData.append('job_description', request.job_description);
     }
 
-    const response = await fetch(`${API_BASE_URL}/api/resume/analyze`, {
+    const response = await fetch(`${API_BASE_URL}/resume/analyze`, {
       method: 'POST',
       body: formData,
     });
@@ -133,7 +133,7 @@ export const resumeService = {
 
   // Get ATS score only
   async getATSScore(resumeText: string, jobDescription?: string): Promise<ATSScore> {
-    const response = await fetch(`${API_BASE_URL}/api/resume/score`, {
+    const response = await fetch(`${API_BASE_URL}/resume/score`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -154,7 +154,7 @@ export const resumeService = {
 
   // Get improvement suggestions only
   async getSuggestions(resumeText: string, jobDescription?: string): Promise<Suggestions> {
-    const response = await fetch(`${API_BASE_URL}/api/resume/suggestions`, {
+    const response = await fetch(`${API_BASE_URL}/resume/suggestions`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -175,7 +175,7 @@ export const resumeService = {
 
   // Extract keywords only
   async extractKeywords(jobDescription: string, resumeText?: string): Promise<KeywordAnalysis> {
-    const response = await fetch(`${API_BASE_URL}/api/resume/keywords`, {
+    const response = await fetch(`${API_BASE_URL}/resume/keywords`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
