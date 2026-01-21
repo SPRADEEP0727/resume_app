@@ -25,24 +25,30 @@ COPY . .
 # Build the Vite app (environment variables are baked in at build time)
 RUN npm run build
 
-# Production stage
-FROM node:18-alpine
+# Production stage - use nginx instead of serve (no npm needed)
+FROM nginx:alpine
 
-WORKDIR /app
+WORKDIR /usr/share/nginx/html
 
-# Install serve globally
-RUN npm install -g serve
+# Remove default nginx files
+RUN rm -rf ./*
 
 # Copy built files from builder
-COPY --from=builder /app/dist ./dist
+COPY --from=builder /app/dist .
+
+# Create nginx config for SPA
+RUN echo 'server { \n\
+    listen 3000; \n\
+    root /usr/share/nginx/html; \n\
+    index index.html; \n\
+    location / { \n\
+        try_files $uri $uri/ /index.html; \n\
+    } \n\
+}' > /etc/nginx/conf.d/default.conf
 
 # Expose port
 EXPOSE 3000
 
-# Health check
-HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
-    CMD wget --no-verbose --tries=1 --spider http://localhost:3000 || exit 1
-
-# Serve the built files
-CMD ["serve", "-s", "dist", "-l", "3000"]
+# Start nginx
+CMD ["nginx", "-g", "daemon off;"]
 
