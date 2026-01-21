@@ -1,31 +1,4 @@
-# Multi-stage build for optimized image size
-FROM node:18-alpine AS builder
-
-WORKDIR /app
-
-# Accept build arguments
-ARG VITE_SUPABASE_URL
-ARG VITE_SUPABASE_ANON_KEY
-ARG VITE_API_BASE_URL=/api
-
-# Set as environment variables for the build
-ENV VITE_SUPABASE_URL=${VITE_SUPABASE_URL}
-ENV VITE_SUPABASE_ANON_KEY=${VITE_SUPABASE_ANON_KEY}
-ENV VITE_API_BASE_URL=${VITE_API_BASE_URL}
-
-# Copy package files
-COPY package*.json ./
-
-# Install dependencies - use install instead of ci to avoid npm registry issues
-RUN npm install --legacy-peer-deps || npm install --force
-
-# Copy source code
-COPY . .
-
-# Build the Vite app (environment variables are baked in at build time)
-RUN npm run build
-
-# Production stage - use nginx instead of serve (no npm needed)
+# Simple production image - serve pre-built dist folder
 FROM nginx:alpine
 
 WORKDIR /usr/share/nginx/html
@@ -33,8 +6,8 @@ WORKDIR /usr/share/nginx/html
 # Remove default nginx files
 RUN rm -rf ./*
 
-# Copy built files from builder
-COPY --from=builder /app/dist .
+# Copy the pre-built dist folder
+COPY dist .
 
 # Create nginx config for SPA
 RUN echo 'server { \n\
